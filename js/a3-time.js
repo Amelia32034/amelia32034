@@ -68,7 +68,7 @@ a3.time.formatDateRange = function (startDate, endDate) {
 a3.time.getRemainingDates = function (dates) {
   var remainingDates = [];
   var now = moment();
-  var startOfDay = now.startOf('day');
+  var startOfDay = moment(now).startOf('day');
   for (var i = 0; i < dates.length; i++) {
     var value = dates[i];
     var date = moment(value);
@@ -80,17 +80,4 @@ a3.time.getRemainingDates = function (dates) {
     }
   }
   return remainingDates;
-  // var remainingDates = [];
-  // var now = moment();
-  // var startOfDay = moment().startOf('day');
-  // jQuery.each(dates, function (index, value) {
-  //     var date = moment(value);
-  //     if (date >= startOfDay) {
-  //         remainingDates.push({
-  //             date: value,
-  //             expiringSoon: date < now
-  //         });
-  //     }
-  // });
-  // return remainingDates;
 };
