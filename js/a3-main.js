@@ -8,7 +8,7 @@
 var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
   // TODO: need cert for backend. Until then, use json file for data.
   // var eventsUrl = 'http://amelia32034.com/wp-json/a3/v1/events';
-  var eventsUrl = '/data/events.json';
+  var eventsUrl = './data/events.json';
 
   var eventsData = [];
 
