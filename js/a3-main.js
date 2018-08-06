@@ -4,11 +4,13 @@
 /* global jQuery */
 /* global React */
 /* global ReactDOM */
+/* global _ */
 
 var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
   // TODO: need cert for backend. Until then, use json file for data.
   // var eventsUrl = 'http://amelia32034.com/wp-json/a3/v1/events';
   var eventsUrl = './data/events.json';
+  // var eventsUrl = 'https://stephanpitois.github.io/amelia32034/data/events.json';
 
   var eventsData = [];
 
@@ -407,15 +409,28 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
   }
 
   function App (props) {
+    var events = removeExpiredEvents(props.events);
     return e(
       'div', {
         className: 'a3-app'
       },
       e(
         EventSplitView, {
-          events: props.events,
+          events: events,
           eventId: props.eventId
         }));
+  }
+
+  /**
+   * Remove expired events.
+   * Useful when looking at cached data or a static json file.
+   */
+  function removeExpiredEvents (events) {
+    var startOfDay = moment().startOf('day');
+    return _.filter(events, function (event) {
+      var endDate = moment(event.endDate);
+      return endDate >= startOfDay;
+    });
   }
 
   function handleRouteChange () {
