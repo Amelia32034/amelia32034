@@ -171,7 +171,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
     }
     return e(
       'li', {
-        className: 'li-Event li-eventtype-' + event.eventType + (active ? ' active ' : ''),
+        className: 'li-Event ripple li-eventtype-' + event.eventType + (active ? ' active ' : ''),
         id: 'event-' + event.id,
         onClick: function (e) {
           e.preventDefault();
