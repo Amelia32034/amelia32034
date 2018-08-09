@@ -7,11 +7,6 @@
 /* global _ */
 
 var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
-  // TODO: need cert for backend. Until then, use json file for data.
-  // var eventsUrl = 'http://amelia32034.com/wp-json/a3/v1/events';
-  var eventsUrl = './data/events.json';
-  // var eventsUrl = 'https://stephanpitois.github.io/amelia32034/data/events.json';
-
   var eventsData = [];
 
   var navigateToEvents = function () {
@@ -133,7 +128,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
     var active = props.active || false;
     // Not sure where/when to update the title... So this should do for now.
     if (active) {
-      document.title = event.name + ' | Amelia 32034';
+      document.title = event.name + a3.config.documentTitleSuffix;
     }
     var eventTypeAttributes = a3.utilities.getEventTypeAttributes(event);
     var dates = null;
@@ -422,9 +417,9 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
   }
 
   /**
-   * Remove expired events.
-   * Useful when looking at cached data or a static json file.
-   */
+     * Remove expired events.
+     * Useful when looking at cached data or a static json file.
+     */
   function removeExpiredEvents (events) {
     var startOfDay = moment().startOf('day');
     return _.filter(events, function (event) {
@@ -454,7 +449,8 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
             e(
               App, {
                 events: data,
-                eventId: parseInt(id.trim())
+                // eventId: parseInt(id.trim())
+                eventId: id.trim()
               }),
             document.getElementById('root'));
         } else {
@@ -472,12 +468,26 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
     }
   }
 
-  function run () {
-    jQuery(window).on('hashchange', handleRouteChange).trigger('hashchange');
-    jQuery.getJSON(eventsUrl, function (data) {
-      eventsData = data;
+  function run (options) {
+    var backend = options.backend;
+    eventsData = JSON.parse(window.localStorage.getItem('eventsData'));
+    if (eventsData !== null) {
       jQuery(window).trigger('hashchange');
+    }
+    jQuery(window).on('hashchange', handleRouteChange).trigger('hashchange');
+    backend.fetch({
+      config: a3.config,
+      success: function (data) {
+        eventsData = data;
+        window.localStorage.setItem('eventsData', JSON.stringify(eventsData));
+        jQuery(window).trigger('hashchange');
+      }
     });
+
+    // jQuery.getJSON(a3.config.apiUrl, function (data) {
+    //   eventsData = data;
+    //   jQuery(window).trigger('hashchange');
+    // });
   }
 
   return {
