@@ -17,7 +17,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
     window.location.hash = 'events/' + eventId;
   };
 
-  const e = React.createElement;
+  var e = React.createElement;
 
   var KeyGen = (function () {
     var key = 0;
