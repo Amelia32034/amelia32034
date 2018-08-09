@@ -69,17 +69,22 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
 
     componentDidUpdate (prevProps) {
       if (prevProps.items !== this.props.items) {
-        this.setState(prevState => ({
-          expanded: false
-        }));
+        this.setState(function (prevState) {
+          return {
+            expanded: false
+          };
+        });
       }
     }
 
     toggleExpand () {
       // e.preventDefault();
-      this.setState(prevState => ({
-        expanded: !this.state.expanded
-      }));
+      var self = this;
+      this.setState(function (prevState) {
+        return {
+          expanded: !self.state.expanded
+        };
+      });
     }
 
     render () {
@@ -214,11 +219,14 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
         'ul', {
           className: 'events-list'
         },
-        events.map(event => e(
-          EventListItem, {
-            event: event,
-            active: eventId === event.id
-          }))));
+        events.map(function (event) {
+          return e(
+            EventListItem, {
+              event: event,
+              active: eventId === event.id
+            })
+          ;
+        })));
   }
 
   function EventDetails (props) {
