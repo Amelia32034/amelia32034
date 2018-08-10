@@ -1,7 +1,7 @@
 'use strict';
 /* global a3 */
 /* global moment */
-/* global jQuery */
+/* global $ */
 /* global React */
 /* global ReactDOM */
 /* global _ */
@@ -67,15 +67,15 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
   // keyword class, this is the option we use for now.
 
   function resetChipCollection () {
-    jQuery('.chip-collapsible').addClass('chip-collapsed');
-    jQuery('.chip-collection-collapse').addClass('chip-collapsed');
-    jQuery('.chip-collection-expand').removeClass('chip-collapsed');
+    $('.chip-collapsible').addClass('chip-collapsed');
+    $('.chip-collection-collapse').addClass('chip-collapsed');
+    $('.chip-collection-expand').removeClass('chip-collapsed');
   }
 
   function toggleChipCollection () {
-    jQuery('.chip-collapsible').toggleClass('chip-collapsed');
-    jQuery('.chip-collection-collapse').toggleClass('chip-collapsed');
-    jQuery('.chip-collection-expand').toggleClass('chip-collapsed');
+    $('.chip-collapsible').toggleClass('chip-collapsed');
+    $('.chip-collection-collapse').toggleClass('chip-collapsed');
+    $('.chip-collection-expand').toggleClass('chip-collapsed');
   }
 
   function ChipCollection (props) {
@@ -480,22 +480,17 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
     var backend = options.backend;
     eventsData = JSON.parse(window.localStorage.getItem('eventsData'));
     if (eventsData !== null) {
-      jQuery(window).trigger('hashchange');
+      $(window).trigger('hashchange');
     }
-    jQuery(window).on('hashchange', handleRouteChange).trigger('hashchange');
+    $(window).on('hashchange', handleRouteChange).trigger('hashchange');
     backend.fetch({
       config: a3.config,
       success: function (data) {
         eventsData = data;
         window.localStorage.setItem('eventsData', JSON.stringify(eventsData));
-        jQuery(window).trigger('hashchange');
+        $(window).trigger('hashchange');
       }
     });
-
-    // jQuery.getJSON(a3.config.apiUrl, function (data) {
-    //   eventsData = data;
-    //   jQuery(window).trigger('hashchange');
-    // });
   }
 
   return {

@@ -1,5 +1,5 @@
 /* global a3 */
-/* global jQuery */
+/* global $ */
 /* global _ */
 
 a3.backendRestDb = (function () {
@@ -41,7 +41,7 @@ a3.backendRestDb = (function () {
         'cache-control': 'no-cache'
       }
     };
-    jQuery.ajax(settings).done(function (response) {
+    $.ajax(settings).done(function (response) {
       if (typeof success === 'function') {
         success(transform(response));
       }
