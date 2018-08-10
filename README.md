@@ -1,6 +1,23 @@
-# Amelia 32034
+<img src="https://avatars0.githubusercontent.com/u/42271922?s=200&v=4" alt="Amelia 32034" height="60">
 
-Frontend for [Amelia32034.com](https://Amelia32034.com).
+# Amelia 32034 
+
+[Amelia32034.com](https://Amelia32034.com) is a mobile-friendly website that helps find arts and culture events in Amelia Island.
+
+This repository is for the web app's frontend.
+
+## Prioritized Issues
+
+See [Kanban Board](https://github.com/Amelia32034/amelia32034/projects/1).
+
+## Tech & Dependencies
+
+- [React](https://reactjs.org/)
+- [jQuery](https://jquery.com/)
+- [Lodash](https://lodash.com/)
+- [Moment.js](https://momentjs.com/)
+- [Font Awesome](https://fontawesome.com/)
+- [Lobster font](https://fonts.google.com/specimen/Lobster)
 
 ## Special Thanks
 
