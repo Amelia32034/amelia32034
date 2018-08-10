@@ -408,3 +408,6 @@ header {
 	transition: background 0s;
   }
   
+.chip-collapsed {
+	display: none;
+}

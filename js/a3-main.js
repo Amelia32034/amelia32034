@@ -60,71 +60,66 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
     );
   }
 
-  class ChipCollection extends React.Component {
-    constructor (props) {
-      super(props);
-      this.state = { expanded: false };
-      this.toggleExpand = this.toggleExpand.bind(this);
+  // resetChipCollection & toggleChipCollection are a
+  // bad alternative to using a React Component, but
+  // because the code here cannot be transpiled, has
+  // to be vanilla JS, and therefore cannot use the
+  // keyword class, this is the option we use for now.
+
+  function resetChipCollection () {
+    jQuery('.chip-collapsible').addClass('chip-collapsed');
+    jQuery('.chip-collection-collapse').addClass('chip-collapsed');
+    jQuery('.chip-collection-expand').removeClass('chip-collapsed');
+  }
+
+  function toggleChipCollection () {
+    jQuery('.chip-collapsible').toggleClass('chip-collapsed');
+    jQuery('.chip-collection-collapse').toggleClass('chip-collapsed');
+    jQuery('.chip-collection-expand').toggleClass('chip-collapsed');
+  }
+
+  function ChipCollection (props) {
+    function toggleExpand (e) {
+      e.preventDefault();
+      toggleChipCollection();
     }
 
-    componentDidUpdate (prevProps) {
-      if (prevProps.items !== this.props.items) {
-        this.setState(function (prevState) {
-          return {
-            expanded: false
-          };
-        });
-      }
-    }
+    var maxVisible = props.maxVisible || 3;
+    var items = props.items;
+    var hiddenCount = props.items.length - maxVisible;
 
-    toggleExpand () {
-      // e.preventDefault();
-      var self = this;
-      this.setState(function (prevState) {
-        return {
-          expanded: !self.state.expanded
-        };
-      });
-    }
-
-    render () {
-      var self = this;
-      var maxVisible = this.props.maxVisible || 3;
-      var items = this.state.expanded ? this.props.items : this.props.items.slice(0, maxVisible);
-      var hiddenCount = this.props.items.length - maxVisible;
-
-      var toggle = null;
-      if (hiddenCount > 0) {
-        if (self.state.expanded) {
-          toggle = e(
-            Chip, {
-              iconClassName: 'fas fa-chevron-left',
-              text: ' Collapse'
-            });
-        } else {
-          toggle = e(
-            Chip, {
-              text: '+' + hiddenCount + ' more'
-            });
-        }
-      }
-
-      return e('div', null,
-        items.map(function (item, index) {
-          return e(
-            'span', {
-              className: index >= maxVisible ? 'fade-in' : ''
-            },
-            e(Chip, self.props.getChipProps(item, index)),
-            e('span', null, ' '));
-        }),
+    var toggle = null;
+    if (hiddenCount > 0) {
+      toggle = e(
+        'span',
+        null,
         e(
-          'span', {
-            className: 'cursor-pointer',
-            onClick: this.toggleExpand
-          },
-          toggle));
+          Chip, {
+            className: 'chip-collection-collapse chip-collapsed',
+            iconClassName: 'fas fa-chevron-left',
+            text: ' Collapse'
+          }), e(
+          Chip, {
+            className: 'chip-collection-expand',
+            text: '+' + hiddenCount + ' more'
+          }));
     }
+
+    return e('div', null,
+      items.map(function (item, index) {
+        return e(
+          'span', {
+            className: index >= maxVisible ? 'chip-collapsible chip-collapsed fade-in' : ''
+          },
+          e(Chip, props.getChipProps(item, index)),
+          e('span', null, ' '));
+      }),
+      e(
+        'span', {
+          className: 'cursor-pointer',
+          onClick: toggleExpand
+        },
+        toggle));
   }
 
   function EventListItem (props) {
@@ -436,6 +431,10 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
     });
   }
 
+  function resetComponents () {
+    resetChipCollection();
+  }
+
   function handleRouteChange () {
     var data = eventsData;
     var url = decodeURI(window.location.hash);
@@ -453,6 +452,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
       '#events': function () {
         var id = url.split('#events/')[1];
         if (typeof id !== 'undefined') {
+          resetComponents();
           ReactDOM.render(
             e(
               App, {
