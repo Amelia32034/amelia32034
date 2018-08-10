@@ -2,7 +2,7 @@
 
 # Amelia 32034 
 
-Frontend for[Amelia32034.com](https://Amelia32034.com), a website that lists events local to Amelia Island, Florida, with a focus on culture and the arts.
+Frontend for [Amelia32034.com](https://Amelia32034.com), a website that lists events local to Amelia Island, Florida, with a focus on culture and the arts.
 
 ## Prioritized Issues
 
