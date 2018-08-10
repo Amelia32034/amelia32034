@@ -2,9 +2,9 @@
 
 # Amelia 32034 
 
-Frontend for [Amelia32034.com](https://Amelia32034.com).
+Find arts and culture events in Amelia Island.
 
-Amelia 32034: find arts and culture events in Amelia Island.
+Frontend for [Amelia32034.com](https://Amelia32034.com).
 
 ## Prioritized Issues
 
