@@ -8,7 +8,7 @@ Amelia 32034: find arts and culture events in Amelia Island.
 
 ## Prioritized Issues
 
-See [Kanban Board](https://github.com/Amelia32034/amelia32034/projects/1)
+See [Kanban Board](https://github.com/Amelia32034/amelia32034/projects/1).
 
 ## Dependencies
 
