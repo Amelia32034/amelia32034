@@ -106,7 +106,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
     }
 
     return e('div', null,
-      items.map(function (item, index) {
+      _.map(items, function (item, index) {
         return e(
           'span', {
             className: index >= maxVisible ? 'chip-collapsible chip-collapsed fade-in' : ''
@@ -214,7 +214,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
         'ul', {
           className: 'events-list'
         },
-        events.map(function (event) {
+        _.map(events, function (event) {
           return e(
             EventListItem, {
               event: event,
@@ -380,7 +380,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
   function EventSplitView (props) {
     var events = props.events;
     var eventId = props.eventId;
-    var event = events.find(function (item) {
+    var event = _.find(events, function (item) {
       return item.id === eventId;
     });
     var eventDetails = null;

@@ -4,7 +4,7 @@
 
 a3.backendRestDb = (function () {
   var transform = function (data) {
-    var result = data.map(function (item) {
+    var result = _.map(data, function (item) {
       var dates = _.split(item.dates, '\n');
       _.remove(dates, function (entry) {
         return entry.trim() === '';

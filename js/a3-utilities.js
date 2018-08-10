@@ -1,21 +1,8 @@
 /* global a3 */
-/* global jQuery */
 
 a3.utilities = a3.utilities || {};
 
 a3.utilities.spacer = "<span class='a3-spacer'></span>";
-
-a3.utilities.findById = function (arr, id) {
-  if (typeof arr.find === 'function') {
-    return arr.find(function (item) {
-      return item.id === id;
-    });
-  } else {
-    return jQuery.grep(arr, function (item) {
-      return item.id === id;
-    })[0];
-  }
-};
 
 a3.utilities.pluralize = function (strSingular, strPlural, count) {
   return count === 1 ? strSingular : strPlural;
