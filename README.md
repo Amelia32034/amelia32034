@@ -2,15 +2,15 @@
 
 # Amelia 32034 
 
-Find arts and culture events in Amelia Island.
+[Amelia32034.com](https://Amelia32034.com) is a mobile-friendly website that helps find arts and culture events in Amelia Island.
 
-Frontend for [Amelia32034.com](https://Amelia32034.com).
+This repository is for the web app's frontend.
 
 ## Prioritized Issues
 
 See [Kanban Board](https://github.com/Amelia32034/amelia32034/projects/1).
 
-## Dependencies
+## Tech & Dependencies
 
 - [React](https://reactjs.org/)
 - [jQuery](https://jquery.com/)
