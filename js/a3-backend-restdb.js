@@ -9,6 +9,7 @@ a3.backendRestDb = (function () {
       _.remove(dates, function (entry) {
         return entry.trim() === '';
       });
+      dates = dates.sort();
       return {
         id: item._id,
         name: item.name,
