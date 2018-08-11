@@ -50,14 +50,16 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
       }
     }
 
-    return e(
-      'span', {
-        className: 'a3-badge ' + color + ' ' + className,
-        onClick: handleClick
-      },
-      iconClassName ? e('i', { className: iconClassName }) : null,
-      text
-    );
+    return a3.mdl.chip({ text: text });
+
+    // return e(
+    //   'span', {
+    //     className: 'a3-badge ' + color + ' ' + className,
+    //     onClick: handleClick
+    //   },
+    //   iconClassName ? e('i', { className: iconClassName }) : null,
+    //   text
+    // );
   }
 
   // resetChipCollection & toggleChipCollection are a
@@ -246,6 +248,9 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
       ),
       e('h2', null, props.event.name),
       e('hr'),
+      // a3.mdl.button({ text: 'before' }),
+      // a3.mdl.header({ title: 'Hello!' }),
+      // a3.mdl.button({ text: 'after' }),
       e(EventDetailsEventType, { event: props.event }),
       e('div', null, props.event.location),
       e(EventDetailsEventDates, { event: props.event }),
