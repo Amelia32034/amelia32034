@@ -17,11 +17,11 @@ a3.mdl = (function () {
     );
   };
 
-  var createHeader = function (props) {
+  var createLayout = function (props) {
     // e('!-- Always shows a header, even in smaller screens. --' },
     return e(
       'div', {
-        className: 'mdl-layout mdl-js-layout mdl-layout--fixed-header'
+        className: 'mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button' + ' ' + props.className
       },
       e(
         'header', {
@@ -35,13 +35,19 @@ a3.mdl = (function () {
             'span', {
               className: 'mdl-layout-title'
             },
-            props.title),
-          e('div', { className: 'mdl-layout-spacer' }),
-          e('nav', { className: 'mdl-navigation mdl-layout--large-screen-only' })
+            props.title)
+          // e('div', { className: 'mdl-layout-spacer' }),
+          // e('nav', { className: 'mdl-navigation mdl-layout--large-screen-only' })
         )),
-      e('main', { className: 'mdl-layout__content' },
-        e('div', { className: 'page-content' },
-          'Your content goes here')));
+      e(
+        'main', {
+          className: 'mdl-layout__content'
+        },
+        e(
+          'div', {
+            className: 'page-content'
+          },
+          props.content)));
   };
 
   var createChip = function (props) {
@@ -60,7 +66,7 @@ a3.mdl = (function () {
 
   return {
     button: createButton,
-    header: createHeader,
+    layout: createLayout,
     chip: createChip
   };
 })();

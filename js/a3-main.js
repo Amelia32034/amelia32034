@@ -227,12 +227,54 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
             EventListItem, {
               event: event,
               active: eventId === event.id
-            })
-          ;
+            });
         })));
   }
 
   function EventDetails (props) {
+    return e(
+      'div', {
+        className: 'a3-event-details'
+      },
+      e(
+        'div', {
+          className: 'a3-event-details-content'
+        },
+        e('h2', null, props.event.name),
+        e('hr'),
+        // a3.mdl.button({ text: 'before' }),
+        // a3.mdl.header({ title: 'Hello!' }),
+        // a3.mdl.button({ text: 'after' }),
+        e(EventDetailsEventType, { event: props.event }),
+        e('div', null, props.event.location),
+        e(EventDetailsEventDates, { event: props.event }),
+        e('hr'),
+        e('div', { dangerouslySetInnerHTML: { __html: props.event.description } }),
+        e(EventDetailsEventUrls, { event: props.event }))
+    );
+
+  // return a3.mdl.layout({
+  //   title: '< Back', // 'Amelia 32034',
+  //   className: 'a3-event-details',
+  //   content: e(
+  //     'div', {
+  //       className: 'a3-event-details-content'
+  //     },
+  //     e('h2', null, props.event.name),
+  //     e('hr'),
+  //     // a3.mdl.button({ text: 'before' }),
+  //     // a3.mdl.header({ title: 'Hello!' }),
+  //     // a3.mdl.button({ text: 'after' }),
+  //     e(EventDetailsEventType, { event: props.event }),
+  //     e('div', null, props.event.location),
+  //     e(EventDetailsEventDates, { event: props.event }),
+  //     e('hr'),
+  //     e('div', { dangerouslySetInnerHTML: { __html: props.event.description } }),
+  //     e(EventDetailsEventUrls, { event: props.event }))
+  // });
+  }
+
+  function EventDetailsMaster (props) {
     return e(
       'div', {
         className: 'a3-event-details'
@@ -307,7 +349,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
           'div',
           null,
           a3.time.formatDateRange(event.startDate, event.endDate) + ' · ' +
-          leftCount + ' ' + a3.utilities.pluralize('date', 'dates', leftCount) + left);
+        leftCount + ' ' + a3.utilities.pluralize('date', 'dates', leftCount) + left);
       }
 
       return e(
@@ -426,17 +468,21 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
       'div', {
         className: 'a3-app'
       },
-      e(
-        EventSplitView, {
-          events: events,
-          eventId: props.eventId
-        }));
+      a3.mdl.layout({
+        title: e('span', null, e('span', { className: 'a3-logo' }, 'Amelia 32034'), ' / ', 'Events'), // 'Amelia 32034',
+        className: 'a3-main-header',
+        content: e(
+          EventSplitView, {
+            events: events,
+            eventId: props.eventId
+          })
+      }));
   }
 
   /**
-     * Remove expired events.
-     * Useful when looking at cached data or a static json file.
-     */
+   * Remove expired events.
+   * Useful when looking at cached data or a static json file.
+   */
   function removeExpiredEvents (events) {
     var startOfDay = moment().startOf('day');
     return _.filter(events, function (event) {
