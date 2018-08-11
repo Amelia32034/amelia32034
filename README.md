@@ -9,8 +9,7 @@
 <p align="center">
   Find arts and culture events in Amelia Island.
   <br>
-  <br>
-  - Frontend repository -
+  -- This is the frontend repository --
   <br>
   <br>
 </p>
