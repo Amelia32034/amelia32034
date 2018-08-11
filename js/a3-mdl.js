@@ -48,7 +48,7 @@ a3.mdl = (function () {
     // < !--Basic Chip-- >
     return e(
       'span', {
-        className: 'mdl-chip'
+        className: 'mdl-chip' + ' ' + props.className
       },
       e(
         'span', {

@@ -50,7 +50,10 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
       }
     }
 
-    return a3.mdl.chip({ text: text });
+    return a3.mdl.chip({
+      text: text,
+      className: className + (color ? ' bg-' + color : '')
+    });
 
     // return e(
     //   'span', {
@@ -99,11 +102,14 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
           Chip, {
             className: 'chip-collection-collapse chip-collapsed',
             iconClassName: 'fas fa-chevron-left',
-            text: ' Collapse'
+            text: 'less',
+            color: 'clear'
           }), e(
           Chip, {
             className: 'chip-collection-expand',
-            text: '+' + hiddenCount + ' more'
+            // text: '+ ' + hiddenCount + ' more …',
+            text: '+ ' + hiddenCount + ' more',
+            color: 'clear'
           }));
     }
 
@@ -165,7 +171,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
               className: 'nowrap'
             },
             calDisplay,
-            leftCount > 1 ? ' +' + (leftCount - 1) : ''
+            leftCount > 1 ? ' + ' + (leftCount - 1) + ' more' : ''
           ));
       } else {
         dates = calDisplay;
@@ -271,8 +277,11 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
           text: eventTypeAttributes.label,
           color: eventTypeAttributes.color
         }),
-      e(Spacer),
-      event.category);
+      eventTypeAttributes.label === event.category ? null : e(
+        Chip, {
+          text: event.category,
+          color: 'clear'
+        }));
   }
 
   function EventDetailsEventDates (props) {

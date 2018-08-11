@@ -217,6 +217,13 @@ h2 {
 	color: #FFC107;
 }
 
+.bg-clear,
+.a3-badge.clear,
+.notification.clear {
+	background: transparent;
+	color: #333;
+}
+
 .bg-blue,
 .a3-badge.blue,
 .notification.blue {
@@ -410,4 +417,16 @@ header {
   
 .chip-collapsed {
 	display: none;
+}
+
+.chip-collection-expand,
+.chip-collection-collapse {
+	cursor: pointer;
+}
+
+.chip-collection-expand:hover,
+.chip-collection-expand:active,
+.chip-collection-collapse:hover ,
+.chip-collection-collapse:active {
+	text-decoration: underline;
 }
