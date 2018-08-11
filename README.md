@@ -1,10 +1,19 @@
-<img src="https://avatars0.githubusercontent.com/u/42271922?s=200&v=4" alt="Amelia 32034" height="60">
+<p align="center">
+  <a href="http://amelia32034.com/">
+    <img src="https://avatars0.githubusercontent.com/u/42271922?s=200&v=4" alt="Amelia 32034" height="60">
+  </a>
+</p>
 
-# Amelia 32034 
+<h3 align="center">Amelia 32034</h3>
 
-[Amelia32034.com](https://Amelia32034.com) is a mobile-friendly website that helps find arts and culture events in Amelia Island.
-
-This repository is for the web app's frontend.
+<p align="center">
+  Find arts and culture events in Amelia Island.
+  <br>
+  <br>
+  - Frontend repository -
+  <br>
+  <br>
+</p>
 
 ## Prioritized Issues
 
