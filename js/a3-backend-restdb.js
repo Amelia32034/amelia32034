@@ -33,7 +33,7 @@ a3.backendRestDb = (function () {
     var settings = {
       'async': true,
       'crossDomain': true,
-      'url': config.restDbApiUrl + 'events?q={"endDate":{"$gt":{"$date":"$tomorrow"}}}&sort=startDate',
+      'url': config.restDbApiUrl + 'events?q={"endDate":{"$gte":{"$date":"$now"}}}&sort=startDate',
       'method': 'GET',
       'headers': {
         'content-type': 'application/json',
