@@ -11,7 +11,6 @@
   <br>
   -- This is the frontend repository --
   <br>
-  <br>
 </p>
 
 ## Prioritized Issues
@@ -29,9 +28,9 @@ See [Kanban Board](https://github.com/Amelia32034/amelia32034/projects/1).
 
 ## Special Thanks
 
-- [restdb.io](https://restdb.io/) | Our project's simple online NoSQL database backend.
-- [GitHub Pages](https://pages.github.com/) | Our project is hosted directly from our GitHub repository.
-- [BrowserStack](https://www.browserstack.com/open-source) | Instant access to 1200+ real mobile devices and browsers for testing our project.
+- [restdb.io](https://restdb.io/) - our project's simple online NoSQL database backend
+- [GitHub Pages](https://pages.github.com/) - our project is hosted directly from our GitHub repository
+- [BrowserStack](https://www.browserstack.com/open-source) - instant access to 1200+ real mobile devices and browsers for testing our project
 
 <p align="center">
   <a href="https://www.browserstack.com/open-source">
