@@ -102,7 +102,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
           Chip, {
             className: 'chip-collection-collapse chip-collapsed',
             iconClassName: 'fas fa-chevron-left',
-            text: 'less',
+            text: 'show less',
             color: 'clear'
           }), e(
           Chip, {
@@ -130,15 +130,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
         toggle));
   }
 
-  function EventListItem (props) {
-    props = props || {};
-    var event = props.event || {};
-    var active = props.active || false;
-    // Not sure where/when to update the title... So this should do for now.
-    if (active) {
-      document.title = event.name + a3.config.documentTitleSuffix;
-    }
-    var eventTypeAttributes = a3.utilities.getEventTypeAttributes(event);
+  function getEventDatesForList (event) {
     var dates = null;
     if (event.dates.length <= 0) {
       dates = e('span', null, a3.time.formatDateRange(event.startDate, event.endDate));
@@ -164,19 +156,33 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
       }
       if (allCount > 1) {
         dates = e('span', null,
-          a3.time.formatDateRange(event.startDate, event.endDate),
-          ' · ',
           e(
             'span', {
               className: 'nowrap'
             },
             calDisplay,
             leftCount > 1 ? ' + ' + (leftCount - 1) + ' more' : ''
-          ));
+            // leftCount > 1 ? ' · + ' + (leftCount - 1) + '' : ''
+          )
+          // ' · ',
+          // a3.time.formatDateRange(event.startDate, event.endDate)
+        );
       } else {
         dates = calDisplay;
       }
     }
+    return dates;
+  }
+
+  function EventListItem (props) {
+    props = props || {};
+    var event = props.event || {};
+    var active = props.active || false;
+    // Not sure where/when to update the title... So this should do for now.
+    if (active) {
+      document.title = event.name + a3.config.documentTitleSuffix;
+    }
+    var eventTypeAttributes = a3.utilities.getEventTypeAttributes(event);
     return e(
       'li', {
         className: 'li-Event ripple li-eventtype-' + event.eventType + (active ? ' active ' : ''),
@@ -186,32 +192,43 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
           navigateToEvent(event.id);
         }
       },
-      e(
-        'div', {
-          className: 'li-event-icon',
-          dangerouslySetInnerHTML: {
-            __html: eventTypeAttributes.icon
-          }
-        }),
-      e(
-        'div', {
-          className: 'li-event-name'
-        },
-        event.name),
-      e(
-        'div', {
-          className: 'li-event-location'
-        },
-        event.location),
-      e(
-        'div', {
-          className: 'li-event-startDate'
-        },
-        dates)
+      e('div', { className: 'li-event-icon' }, a3.mdl.icon({ name: eventTypeAttributes.mdIcon })),
+      e('div', { className: 'li-event-name' }, event.name),
+      e('div', { className: 'li-event-location' }, event.location),
+      e('div', { className: 'li-event-startDate' }, getEventDatesForList(event))
     );
   }
 
   function EventList (props) {
+    return e(
+      'div', {
+        className: 'a3-event-list'
+      },
+      a3.mdl.list({
+        items: props.events,
+        divider: true,
+        getIconInfo: function (event) {
+          var eventTypeAttributes = a3.utilities.getEventTypeAttributes(event);
+          return {
+            icon: eventTypeAttributes.mdIcon,
+            color: eventTypeAttributes.color
+          };
+        },
+        getLine1: function (event) {
+          return event.name;
+        },
+        getLine2: function (event) {
+          // return e('span', null, getEventDatesForList(event), event.location);
+          // return e('span', null, getEventDatesForList(event), e('br'), event.location);
+          // return e('span', null, getEventDatesForList(event), e('span', null, ' · '), event.location);
+          return e('span', null, event.location, e('br'), getEventDatesForList(event));
+        },
+        onItemClick: function (event) {
+          navigateToEvent(event.id);
+        }
+      })
+    );
+
     var events = props.events;
     var eventId = props.eventId;
     return e(
@@ -253,25 +270,25 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
         e(EventDetailsEventUrls, { event: props.event }))
     );
 
-  // return a3.mdl.layout({
-  //   title: '< Back', // 'Amelia 32034',
-  //   className: 'a3-event-details',
-  //   content: e(
-  //     'div', {
-  //       className: 'a3-event-details-content'
-  //     },
-  //     e('h2', null, props.event.name),
-  //     e('hr'),
-  //     // a3.mdl.button({ text: 'before' }),
-  //     // a3.mdl.header({ title: 'Hello!' }),
-  //     // a3.mdl.button({ text: 'after' }),
-  //     e(EventDetailsEventType, { event: props.event }),
-  //     e('div', null, props.event.location),
-  //     e(EventDetailsEventDates, { event: props.event }),
-  //     e('hr'),
-  //     e('div', { dangerouslySetInnerHTML: { __html: props.event.description } }),
-  //     e(EventDetailsEventUrls, { event: props.event }))
-  // });
+    // return a3.mdl.layout({
+    //   title: '< Back', // 'Amelia 32034',
+    //   className: 'a3-event-details',
+    //   content: e(
+    //     'div', {
+    //       className: 'a3-event-details-content'
+    //     },
+    //     e('h2', null, props.event.name),
+    //     e('hr'),
+    //     // a3.mdl.button({ text: 'before' }),
+    //     // a3.mdl.header({ title: 'Hello!' }),
+    //     // a3.mdl.button({ text: 'after' }),
+    //     e(EventDetailsEventType, { event: props.event }),
+    //     e('div', null, props.event.location),
+    //     e(EventDetailsEventDates, { event: props.event }),
+    //     e('hr'),
+    //     e('div', { dangerouslySetInnerHTML: { __html: props.event.description } }),
+    //     e(EventDetailsEventUrls, { event: props.event }))
+    // });
   }
 
   function EventDetailsMaster (props) {
@@ -349,7 +366,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
           'div',
           null,
           a3.time.formatDateRange(event.startDate, event.endDate) + ' · ' +
-        leftCount + ' ' + a3.utilities.pluralize('date', 'dates', leftCount) + left);
+          leftCount + ' ' + a3.utilities.pluralize('date', 'dates', leftCount) + left);
       }
 
       return e(
@@ -422,15 +439,9 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
       }));
     }
     return e(
-      'div', {
-        className: 'a3-event-details-event-urls'
-      },
+      'div', { className: 'a3-event-details-event-urls' },
       e('hr'),
-      e(
-        'div', {
-          className: 'event-urls'
-        },
-        urls));
+      e('div', { className: 'event-urls' }, urls));
   }
 
   function EventSplitView (props) {
@@ -462,6 +473,37 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
         eventDetails));
   }
 
+  function getHeaderTitle (props) {
+    var homeTitle = e(
+      'span',
+      null,
+      e(
+        'span', {
+          className: 'a3-logo cursor-pointer',
+          onClick: function (e) {
+            e.preventDefault();
+            navigateToEvents();
+          }
+        },
+        'Amelia 32034'));
+    return !props.eventId // Type is a UID, so no risk of have a zero value
+      ? homeTitle
+      : e(
+        'span',
+        null,
+        e('span', { className: 'md-and-up' }, homeTitle),
+        e(
+          'span', {
+            className: 'sm-and-down cursor-pointer',
+            onClick: function (e) {
+              e.preventDefault();
+              navigateToEvents();
+            }
+          },
+          a3.mdl.icon({ name: 'arrow_back' })
+        ));
+  }
+
   function App (props) {
     var events = removeExpiredEvents(props.events);
     return e(
@@ -469,8 +511,8 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
         className: 'a3-app'
       },
       a3.mdl.layout({
-        title: e('span', null, e('span', { className: 'a3-logo' }, 'Amelia 32034'), ' / ', 'Events'), // 'Amelia 32034',
-        className: 'a3-main-header',
+        title: getHeaderTitle(props),
+        className: 'a3-main-layout',
         content: e(
           EventSplitView, {
             events: events,

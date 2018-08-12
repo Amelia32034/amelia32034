@@ -15,6 +15,7 @@ a3.utilities.getEventTypeAttributes = function (event) {
       label: 'Music',
       color: 'red',
       icon: '<i class="fas fa-music"></i>',
+      mdIcon: 'music_note',
       symbol: 'M'
     };
   } else if (event.eventType === 'TheaterEvent') {
@@ -23,6 +24,7 @@ a3.utilities.getEventTypeAttributes = function (event) {
       label: 'Theatre',
       color: 'blue',
       icon: '<i class="fas fa-theater-masks"></i>',
+      mdIcon: 'local_play',
       symbol: 'T'
     };
   } else {
@@ -31,6 +33,7 @@ a3.utilities.getEventTypeAttributes = function (event) {
       label: 'Other',
       color: 'yellow',
       icon: '<i class="fas fa-calendar-alt"></i>',
+      mdIcon: 'event',
       symbol: 'O'
     };
   }
