@@ -37,32 +37,13 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
   }
 
   function Chip (props) {
-    var iconClassName = props.iconClassName || '';
     var text = props.text || '';
     var color = props.color || '';
     var className = props.className || '';
-    var onClick = props.onClick || null;
-
-    function handleClick (e) {
-      e.preventDefault();
-      if (typeof onClick === 'function') {
-        onClick();
-      }
-    }
-
     return a3.mdl.chip({
       text: text,
       className: className + (color ? ' bg-' + color : '')
     });
-
-    // return e(
-    //   'span', {
-    //     className: 'a3-badge ' + color + ' ' + className,
-    //     onClick: handleClick
-    //   },
-    //   iconClassName ? e('i', { className: iconClassName }) : null,
-    //   text
-    // );
   }
 
   // resetChipCollection & toggleChipCollection are a
@@ -107,7 +88,6 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
           }), e(
           Chip, {
             className: 'chip-collection-expand',
-            // text: '+ ' + hiddenCount + ' more …',
             text: '+ ' + hiddenCount + ' more',
             color: 'clear'
           }));
@@ -162,10 +142,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
             },
             calDisplay,
             leftCount > 1 ? ' + ' + (leftCount - 1) + ' more' : ''
-            // leftCount > 1 ? ' · + ' + (leftCount - 1) + '' : ''
           )
-          // ' · ',
-          // a3.time.formatDateRange(event.startDate, event.endDate)
         );
       } else {
         dates = calDisplay;
@@ -174,39 +151,19 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
     return dates;
   }
 
-  function EventListItem (props) {
-    props = props || {};
-    var event = props.event || {};
-    var active = props.active || false;
-    // Not sure where/when to update the title... So this should do for now.
-    if (active) {
-      document.title = event.name + a3.config.documentTitleSuffix;
-    }
-    var eventTypeAttributes = a3.utilities.getEventTypeAttributes(event);
-    return e(
-      'li', {
-        className: 'li-Event ripple li-eventtype-' + event.eventType + (active ? ' active ' : ''),
-        id: 'event-' + event.id,
-        onClick: function (e) {
-          e.preventDefault();
-          navigateToEvent(event.id);
-        }
-      },
-      e('div', { className: 'li-event-icon' }, a3.mdl.icon({ name: eventTypeAttributes.mdIcon })),
-      e('div', { className: 'li-event-name' }, event.name),
-      e('div', { className: 'li-event-location' }, event.location),
-      e('div', { className: 'li-event-startDate' }, getEventDatesForList(event))
-    );
-  }
-
   function EventList (props) {
+    var events = props.events;
+    var eventId = props.eventId;
     return e(
       'div', {
         className: 'a3-event-list'
       },
       a3.mdl.list({
-        items: props.events,
+        items: events,
         divider: true,
+        getActive: function (event) {
+          return eventId === event.id;
+        },
         getIconInfo: function (event) {
           var eventTypeAttributes = a3.utilities.getEventTypeAttributes(event);
           return {
@@ -218,9 +175,6 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
           return event.name;
         },
         getLine2: function (event) {
-          // return e('span', null, getEventDatesForList(event), event.location);
-          // return e('span', null, getEventDatesForList(event), e('br'), event.location);
-          // return e('span', null, getEventDatesForList(event), e('span', null, ' · '), event.location);
           return e('span', null, event.location, e('br'), getEventDatesForList(event));
         },
         onItemClick: function (event) {
@@ -228,24 +182,6 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
         }
       })
     );
-
-    var events = props.events;
-    var eventId = props.eventId;
-    return e(
-      'div', {
-        className: 'a3-event-list'
-      },
-      e(
-        'ul', {
-          className: 'events-list'
-        },
-        _.map(events, function (event) {
-          return e(
-            EventListItem, {
-              event: event,
-              active: eventId === event.id
-            });
-        })));
   }
 
   function EventDetails (props) {
@@ -296,26 +232,8 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
       'div', {
         className: 'a3-event-details'
       },
-      e(
-        'div', {
-          className: 'a3-modal-toolbar-top',
-          onClick: function (e) {
-            e.preventDefault();
-            navigateToEvents();
-          }
-        },
-        e(
-          'i', {
-            className: 'fas fa-arrow-left'
-          }),
-        e(Spacer),
-        'All events'
-      ),
       e('h2', null, props.event.name),
       e('hr'),
-      // a3.mdl.button({ text: 'before' }),
-      // a3.mdl.header({ title: 'Hello!' }),
-      // a3.mdl.button({ text: 'after' }),
       e(EventDetailsEventType, { event: props.event }),
       e('div', null, props.event.location),
       e(EventDetailsEventDates, { event: props.event }),
@@ -425,7 +343,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
     if (event.url) {
       urls.push(UrlIcon({
         url: event.url,
-        title: 'Tickets and more information',
+        title: 'More information',
         color: 'yellow',
         icon: 'fas fa-ticket-alt'
       }));
@@ -433,7 +351,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
     if (event.facebookUrl) {
       urls.push(UrlIcon({
         url: event.facebookUrl,
-        title: 'Facebook Page',
+        title: 'Facebook page',
         color: 'blue',
         icon: 'fab fa-facebook-square'
       }));
@@ -506,6 +424,16 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
 
   function App (props) {
     var events = removeExpiredEvents(props.events);
+    var eventId = props.eventId;
+    // Not sure where/when to update the title... So this should do for now.
+    if (eventId) {
+      var event = _.find(events, function (event) {
+        return eventId === event.id;
+      });
+      if (event) {
+        document.title = event.name + a3.config.documentTitleSuffix;
+      }
+    }
     return e(
       'div', {
         className: 'a3-app'
@@ -516,7 +444,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
         content: e(
           EventSplitView, {
             events: events,
-            eventId: props.eventId
+            eventId: eventId
           })
       }));
   }
@@ -559,8 +487,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
             e(
               App, {
                 events: data,
-                // eventId: parseInt(id.trim())
-                eventId: id.trim()
+                eventId: id.trim() // parseInt(id.trim())
               }),
             document.getElementById('root'));
         } else {
