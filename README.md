@@ -23,7 +23,7 @@ See [Kanban Board](https://github.com/Amelia32034/amelia32034/projects/1).
 - [jQuery](https://jquery.com/)
 - [Lodash](https://lodash.com/)
 - [Moment.js](https://momentjs.com/)
-- [Font Awesome](https://fontawesome.com/)
+- [Material Icons](https://material.io/tools/icons/)
 - [Lobster font](https://fonts.google.com/specimen/Lobster)
 
 ## Special Thanks
