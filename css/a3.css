@@ -342,3 +342,7 @@ hr.divider-inset {
 .simple-list .simple-list-text {
 	margin-left: 56px;
 }
+
+.a3-event-details-content .mdl-card__supporting-text {
+    color: rgba(0,0,0,1);
+}
