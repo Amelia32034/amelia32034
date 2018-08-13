@@ -266,18 +266,14 @@ li.mdl-list__item.mdl-list__item--three-line:hover {
 	background: rgba(0, 0, 0, 0.04);
 }
 
-li.mdl-list__item.mdl-list__item--three-line.active::before {
-    position: absolute;
-    left: 0;
-    width: 4px;
-    background: #f44336;
-    content: "";
-    height: inherit;
+li.mdl-list__item.mdl-list__item--three-line.active {
+    border-left: 4px solid #f44336;
 }
 
-.mdl-list__item--three-line .mdl-list__item-primary-content {
-    max-width: calc(100% - 0px);
+li.mdl-list__item.mdl-list__item--three-line.active .mdl-list__item-primary-content {
+    margin-left: -4px;
 }
+
 .border-bottom {
 	border-bottom: 1px solid #e5e5e5;
 }
@@ -345,4 +341,11 @@ hr.divider-inset {
 
 .a3-event-details-content .mdl-card__supporting-text {
     color: rgba(0,0,0,1);
+}
+
+@media (max-width: 479px) {
+	.remaining-dates .mdl-chip {
+		width: 90%;
+		text-align: center;
+	}
 }
