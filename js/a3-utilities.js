@@ -2,8 +2,6 @@
 
 a3.utilities = a3.utilities || {};
 
-a3.utilities.spacer = "<span class='a3-spacer'></span>";
-
 a3.utilities.pluralize = function (strSingular, strPlural, count) {
   return count === 1 ? strSingular : strPlural;
 };

@@ -28,14 +28,6 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
     };
   })();
 
-  function Spacer () {
-    return e('span',
-      {
-        className: 'a3-spacer'
-      }
-    );
-  }
-
   function Chip (props) {
     var text = props.text || '';
     var color = props.color || '';
@@ -193,53 +185,15 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
         'div', {
           className: 'a3-event-details-content'
         },
-        e('h2', null, props.event.name),
-        e('hr'),
-        // a3.mdl.button({ text: 'before' }),
-        // a3.mdl.header({ title: 'Hello!' }),
-        // a3.mdl.button({ text: 'after' }),
-        e(EventDetailsEventType, { event: props.event }),
-        e('div', null, props.event.location),
-        e(EventDetailsEventDates, { event: props.event }),
-        e('hr'),
-        e('div', { dangerouslySetInnerHTML: { __html: props.event.description } }),
-        e(EventDetailsEventUrls, { event: props.event }))
+        a3.mdl.eventCard({
+          event: props.event,
+          shadow: false,
+          fullWidth: true,
+          eventDetailsEventDates: e(EventDetailsEventDates, { event: props.event }),
+          eventDetailsEventType: e(EventDetailsEventType, { event: props.event })
+        })
+      )
     );
-
-    // return a3.mdl.layout({
-    //   title: '< Back', // 'Amelia 32034',
-    //   className: 'a3-event-details',
-    //   content: e(
-    //     'div', {
-    //       className: 'a3-event-details-content'
-    //     },
-    //     e('h2', null, props.event.name),
-    //     e('hr'),
-    //     // a3.mdl.button({ text: 'before' }),
-    //     // a3.mdl.header({ title: 'Hello!' }),
-    //     // a3.mdl.button({ text: 'after' }),
-    //     e(EventDetailsEventType, { event: props.event }),
-    //     e('div', null, props.event.location),
-    //     e(EventDetailsEventDates, { event: props.event }),
-    //     e('hr'),
-    //     e('div', { dangerouslySetInnerHTML: { __html: props.event.description } }),
-    //     e(EventDetailsEventUrls, { event: props.event }))
-    // });
-  }
-
-  function EventDetailsMaster (props) {
-    return e(
-      'div', {
-        className: 'a3-event-details'
-      },
-      e('h2', null, props.event.name),
-      e('hr'),
-      e(EventDetailsEventType, { event: props.event }),
-      e('div', null, props.event.location),
-      e(EventDetailsEventDates, { event: props.event }),
-      e('hr'),
-      e('div', { dangerouslySetInnerHTML: { __html: props.event.description } }),
-      e(EventDetailsEventUrls, { event: props.event }));
   }
 
   function EventDetailsEventType (props) {
@@ -281,8 +235,9 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
       if (allCount > 1) {
         var left = (allCount === leftCount) ? '' : ' left';
         dates = e(
-          'div',
-          null,
+          'div', {
+            className: 'remaining-dates-title'
+          },
           a3.time.formatDateRange(event.startDate, event.endDate) + ' · ' +
           leftCount + ' ' + a3.utilities.pluralize('date', 'dates', leftCount) + left);
       }
@@ -307,59 +262,6 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
               }
             })));
     }
-  }
-
-  function UrlIcon (props) {
-    var url = props.url;
-    var title = props.title;
-    var color = props.color;
-    var icon = props.icon;
-    return e(
-      'div', {
-        className: 'a3-event-details-event-url'
-      },
-      e(
-        'a', {
-          href: url,
-          title: title
-        },
-        e(
-          'i', {
-            className: 'a3-event-details-event-url-icon color-' + color + ' ' + icon + ' fa-2x'
-          }),
-        e(
-          'span', {
-            className: 'a3-event-details-event-url-title'
-          },
-          title)));
-  }
-
-  function EventDetailsEventUrls (props) {
-    var event = props.event;
-    if (!event.url && !event.facebookUrl) {
-      return null;
-    }
-    var urls = [];
-    if (event.url) {
-      urls.push(UrlIcon({
-        url: event.url,
-        title: 'More information',
-        color: 'yellow',
-        icon: 'fas fa-ticket-alt'
-      }));
-    }
-    if (event.facebookUrl) {
-      urls.push(UrlIcon({
-        url: event.facebookUrl,
-        title: 'Facebook page',
-        color: 'blue',
-        icon: 'fab fa-facebook-square'
-      }));
-    }
-    return e(
-      'div', { className: 'a3-event-details-event-urls' },
-      e('hr'),
-      e('div', { className: 'event-urls' }, urls));
   }
 
   function EventSplitView (props) {
