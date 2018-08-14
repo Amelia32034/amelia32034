@@ -127,7 +127,7 @@ hr {
 }
 
 .a3-event-details-content {
-	padding: 40px 20px;
+	padding: 20px 20px;
 }
 
 @media (min-width: 960px) {
@@ -148,7 +148,7 @@ hr {
 		display: block !important;
 	}
 	.a3-event-details-content {
-		padding: 40px 40px;
+		padding: 20px 20px;
 	}
 }
 
@@ -263,11 +263,11 @@ li.mdl-list__item.mdl-list__item--three-line:hover {
 }
 
 li.mdl-list__item.mdl-list__item--three-line.active {
-    border-left: 4px solid #f44336;
+	background-color: rgba(0, 0, 0, 0.08);
 }
 
-li.mdl-list__item.mdl-list__item--three-line.active .mdl-list__item-primary-content {
-    margin-left: -4px;
+.mdl-layout__header {
+	box-shadow: 0 1px 8px 0 rgba(0,0,0,.15);
 }
 
 .border-bottom {
@@ -289,9 +289,9 @@ li.mdl-list__item.mdl-list__item--three-line.active .mdl-list__item-primary-cont
     margin-left: 56px;
 }
 
-.mdl-list__item.mdl-list__item--three-line.has-divider .mdl-list__item-text-body {
+.mdl-list__item.mdl-list__item--three-line.has-divider {
 	/* TODO: figure out why 1px is not enough */
-	border-bottom: 3px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
 }
 
 .full-width {
@@ -332,7 +332,7 @@ hr.divider-inset {
 }
 
 .simple-list .simple-list-text {
-	margin-left: 56px;
+	margin-left: 36px;
 }
 
 .a3-event-details-content .mdl-card__supporting-text {
@@ -341,8 +341,8 @@ hr.divider-inset {
 
 @media (max-width: 479px) {
 	.remaining-dates .mdl-chip {
-		width: 90%;
-		text-align: center;
+		xxx-width: 90%;
+		xxx-text-align: center;
 	}
 }
 
@@ -353,4 +353,13 @@ hr.divider-inset {
 .mdl-textfield__input,
 .mdl-layout__drawer-button {
 	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.mdl-list {
+    padding: 0 0;
+    margin: 0 0;
+}
+
+.mdl-list__item .mdl-list__item-primary-content .mdl-list__item-avatar {
+   margin-top: 3px;
 }
