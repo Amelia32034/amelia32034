@@ -136,9 +136,18 @@ a3.mdl = (function () {
       icon: 'access_time',
       text: e('p', { className: 'margin-bottom-none' }, eventDetailsEventDates)
     });
+    var map = event.location.googleMapsUrl
+      ? e('a', { className: 'smaller', href: event.location.googleMapsUrl, title: 'Map' }, 'Map')
+      : null;
     bottomItems.push({
       icon: 'location_on',
-      text: e('p', { className: 'margin-bottom-none' }, event.location)
+      text: e(
+        'p', {
+          className: 'margin-bottom-none'
+        },
+        event.location.name,
+        e('div', { className: 'color-grey smaller' }, event.location.address),
+        map)
     });
     bottomItems.push({
       icon: 'link',

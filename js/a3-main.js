@@ -34,7 +34,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
     var className = props.className || '';
     return a3.mdl.chip({
       text: text,
-      className: className + (color ? ' bg-' + color : '')
+      className: className + (color ? (' bg-' + color + ' border-' + color) : '')
     });
   }
 
@@ -73,15 +73,13 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
         null,
         e(
           Chip, {
-            className: 'chip-collection-collapse chip-collapsed',
+            className: 'chip-collection-collapse chip-collapsed bg-clear border-grey',
             iconClassName: 'fas fa-chevron-left',
-            text: 'show less',
-            color: 'clear'
+            text: 'show less'
           }), e(
           Chip, {
-            className: 'chip-collection-expand',
-            text: '+ ' + hiddenCount + ' more',
-            color: 'clear'
+            className: 'chip-collection-expand bg-clear border-grey',
+            text: '+ ' + hiddenCount + ' more'
           }));
     }
 
@@ -167,7 +165,7 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
           return event.name;
         },
         getLine2: function (event) {
-          return e('span', null, event.location, e('br'), getEventDatesForList(event));
+          return e('span', null, event.location.name, e('br'), getEventDatesForList(event));
         },
         onItemClick: function (event) {
           navigateToEvent(event.id);
@@ -257,7 +255,8 @@ var Amelia32034 = (function () { // eslint-disable-line no-unused-vars
               getChipProps: function (item, index) {
                 return {
                   text: a3.time.formatCalendar(item.date),
-                  color: item.expiringSoon ? 'red' : ''
+                  className: 'bg-clear border-grey date-chip'
+                  // className: item.expiringSoon ? 'bg-clear border-red' : 'bg-clear border-grey'
                 };
               }
             })));

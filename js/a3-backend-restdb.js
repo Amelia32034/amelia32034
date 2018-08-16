@@ -10,13 +10,21 @@ a3.backendRestDb = (function () {
         return entry.trim() === '';
       });
       dates = dates.sort();
+      var location = null;
+      if (item.location[0]) {
+        location = {
+          name: item.location[0].name,
+          address: item.location[0].address,
+          googleMapsUrl: item.location[0].googleMapsUrl
+        };
+      }
       return {
         id: item._id,
         name: item.name,
         description: item.description,
         startDate: item.startDate.substring(0, 10),
         endDate: item.endDate.substring(0, 10),
-        location: item.location[0].name,
+        location: location,
         url: item.url,
         facebookUrl: item.facebookUrl,
         category: item.category,

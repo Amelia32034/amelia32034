@@ -50,6 +50,14 @@ a {
 	color: #FFC107;
 }
 
+.color-grey {
+	color: rgba(0,0,0,.54);
+}
+
+.smaller {
+	font-size: 90%;
+}
+
 .bg-clear {
 	background: transparent !important;
 	color: #333 !important;
@@ -68,6 +76,36 @@ a {
 .bg-yellow {
 	background: #FFC107 !important;
 	color: #111 !important;
+}
+
+.bg-grey {
+	background: #dedede !important;
+	color: rgba(0,0,0,.87) !important;
+}
+
+.border-clear {
+	border: 1px solid transparent !important;
+}
+
+.border-blue {
+	border: 1px solid #0176be !important;
+}
+
+.border-red {
+	border: 1px solid #F44336 !important;
+}
+
+.border-yellow {
+	border: 1px solid #FFC107 !important;
+}
+
+.border-grey {
+	border: 1px solid #dedede !important;
+}
+
+.date-chip {
+	width: 170px;
+    text-align: center;
 }
 
 hr {
