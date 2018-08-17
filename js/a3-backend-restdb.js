@@ -27,6 +27,7 @@ a3.backendRestDb = (function () {
         location: location,
         url: item.url,
         facebookUrl: item.facebookUrl,
+        ticketsUrl: item.ticketsUrl,
         category: item.category,
         eventType: item.eventType,
         dates: dates

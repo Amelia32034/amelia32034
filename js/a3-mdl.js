@@ -149,20 +149,24 @@ a3.mdl = (function () {
         e('div', { className: 'color-grey smaller' }, event.location.address),
         map)
     });
+    if (event.ticketsUrl) {
+      bottomItems.push({
+        icon: 'local_offer',
+        text: e(
+          'p',
+          { className: 'margin-bottom-none' },
+          e('a', { href: event.ticketsUrl, title: 'Tickets' }, 'Tickets')
+        )
+      });
+    }
     bottomItems.push({
       icon: 'link',
       text: e(
-        'div',
+        'p',
         null,
-        !event.facebookUrl ? null : e(
-          'p',
-          null,
-          e('a', { href: event.facebookUrl, title: 'Facebook Page' }, 'Facebook Page')),
-        !event.url ? null : e(
-          'p', {
-            className: 'margin-bottom-none'
-          },
-          e('a', { href: event.url, title: 'Website' }, 'Website'))
+        !event.url ? null : e('a', { href: event.url, title: 'Website' }, 'Website'),
+        !event.facebookUrl || !event.url ? null : e('span', null, ' · '),
+        !event.facebookUrl ? null : e('a', { href: event.facebookUrl, title: 'Facebook Page' }, 'Facebook Page')
       )
     });
     return e(
