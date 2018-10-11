@@ -299,45 +299,58 @@ body {
     margin-bottom: 80px;
 }
 
+.title-section a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.title-section a:hover {
+    text-decoration: none;
+    color: inherit;
+    background: #eee;
+    border-radius: 15px;
+    padding: 5px 10px;
+}
+
 .home-line-1 {
     text-align: center;
     font-size: 600%;
     font-weight: 900;
-    padding: 20px 0;
+    padding: 20px 10px;
     text-transform: uppercase;
-    line-height: .7;
+    line-height: 1;
 } 
 
 .home-line-2 {
     text-align: center;
     font-size: 300%;
     font-weight: 900;
-    padding: 20px 0;
+    padding: 20px 10px;
     text-transform: uppercase;
-    line-height: .7;
+    line-height: 1;
 }
 
 .home-line-3 {
     text-align: center;
     font-size: 150%;
     font-weight: 700;
-    padding: 20px 0;
+    padding: 20px 10px;
     text-transform: uppercase;
-    line-height: .7;
+    line-height: 1;
 }
 
 .home-line-4 {
     text-align: center;
     font-size: 100%;
     font-weight: 400;
-    padding: 20px 0;
-    line-height: .7;
+    padding: 20px 10px;
+    line-height: 1;
 }
 
 .image-section {
     margin-top: 80px;
     xxx-margin-bottom: 80px;
-    height: 447px;
+    height: 505px;
     background: url(../img/black-and-white-black-and-white-close-up-586415.jpg);
     background-size: cover; 
     background-position: center;
